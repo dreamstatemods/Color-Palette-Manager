@@ -1,0 +1,80 @@
+{
+  "name": "color-palette-manager",
+  "displayName": "Color Palette Manager",
+  "description": "View and edit color palette files (ACO, ASE, JSON, CSS, Tailwind) in VS Code.",
+  "version": "1.0.0",
+  "publisher": "dreamstate",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "adobe",
+    "color",
+    "swatch",
+    "aco",
+    "ase",
+    "palette",
+    "design"
+  ],
+  "icon": "media/icon.png",
+  "activationEvents": [
+    "onView:acoViewer.sidebarView"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "acoSwatchViewer",
+          "title": "Color Palette Manager",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "acoSwatchViewer": [
+        {
+          "type": "webview",
+          "id": "acoViewer.sidebarView",
+          "name": "Color Palette Manager"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "acoViewer.openFile",
+        "title": "Swatch Viewer: Open palette file…",
+        "icon": "$(folder-opened)"
+      }
+    ],
+    "configuration": {
+      "title": "Swatch Viewer",
+      "properties": {
+        "acoViewer.paletteFolder": {
+          "type": "string",
+          "default": "",
+          "description": "Path to folder where palettes are stored. Defaults to ~/.vscode/swatches"
+        },
+        "acoViewer.fontFamily": {
+          "type": "string",
+          "default": "",
+          "description": "Custom font family for the extension UI (e.g. 'Orbitron, Rajdhani, sans-serif'). Leave empty to use VS Code's default font."
+        }
+      }
+    },
+    "menus": {}
+  },
+  "scripts": {
+    "package": "npx @vscode/vsce package"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^2.22.0"
+  },
+  "dependencies": {
+    "@simonwep/pickr": "^1.9.1",
+    "@vscode/codicons": "^0.0.44"
+  }
+}

@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Packaged extension builds
+*.vsix
+
+# Runtime logs
+output.log
+*.log
+
+# Personal VS Code UI customizations (not part of the extension)
+settings.json
+vscode-custom.css
+vscode-custom.js
+
+# OS files
+.DS_Store
+Thumbs.db

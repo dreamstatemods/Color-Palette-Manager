@@ -1,0 +1,6 @@
+# Normalize line endings to LF in the repository
+* text=auto eol=lf
+
+# Treat binary files as binary (no line ending conversion)
+*.png binary
+*.vsix binary
