@@ -1,73 +1,85 @@
-# ACO Swatch Viewer
+# Color Palette Manager
 
-View Adobe Color (`.aco`) palette files directly in VS Code.
+View, edit, and manage color palettes directly in VS Code. Supports **ACO**, **ASE**, **JSON**, **CSS**, and **Tailwind** formats with full import/export, an inline color picker, drag-and-drop reordering, and real-time search.
 
 ## Features
 
-- **Visual swatch grid** — every color displayed at a glance
-- **Color names** — reads embedded names from V2 `.aco` files, auto-names unnamed colors
-- **All formats per swatch** — click any row to copy:
-  - `HEX` — `#5EF6FF`
-  - `RGB` — `rgb(94, 246, 255)`
-  - `HSL` — `hsl(183, 100%, 68%)`
-  - `CSS filter` — the full `filter:` chain to reproduce the color from black, useful for SVG icon tinting
-- **Search** — filter by name or any color value
-- **Export** — save your whole palette as:
-  - **JSON** — `[{ name, hex, rgb, hsl }]`
-  - **CSS variables** — `:root { --color-name: #hex; }`
-  - **Tailwind config** — drop into `theme.extend.colors`
+- **Multi-format support** — import and export ACO, ASE, JSON, CSS variables, and Tailwind config files
+- **Sidebar palette manager** — dedicated activity bar icon with a browsable palette menu and auto-refreshing file list
+- **Visual swatch grid** — two-column card layout showing every color with its name, hex, and all format values
+- **Click to copy** — click any format row (HEX, RGB, HSL, HEXA, RGBA, HSLA, CSS Filter) to copy it to the clipboard
+- **Inline color picker** — add new colors with a full-featured picker (hue, saturation, brightness, opacity)
+- **Edit in place** — rename colors inline, delete with one click, drag-and-drop to reorder
+- **Search** — real-time filtering by name, hex, RGB, HSL, or group
+- **Alpha support** — full transparency handling with HEXA, RGBA, and HSLA displayed when alpha < 1
+- **CSS Filter output** — a complete `filter:` chain to reproduce any color from black, useful for SVG icon tinting
+- **Group labels** — ASE groups and JSON group fields are preserved and displayed as section headers
+- **Spot color indicator** — ASE spot colors are marked with a dot on the swatch
+- **Save to Swatches** — persist palettes to `~/.vscode/swatches` with automatic filename incrementing
+- **Palette switcher** — jump between saved palettes without leaving the editor view
+- **Full theme integration** — all UI colors follow your VS Code theme
+
+## Supported Formats
+
+| Format | Import | Export |
+|--------|:------:|:------:|
+| ACO (Adobe Color / Photoshop) | ✓ | ✓ |
+| ASE (Adobe Swatch Exchange) | ✓ | ✓ |
+| JSON | ✓ | ✓ |
+| CSS custom properties | ✓ | ✓ |
+| Tailwind config (.js/.ts) | ✓ | ✓ |
+
+### Color Spaces Parsed
+
+ACO/ASE files support RGB, HSB/HSV, CMYK, CIE Lab, and Grayscale — all automatically converted to RGB. Text formats accept hex (3/4/6/8-digit), `rgb()`/`rgba()`, and `hsl()`/`hsla()` notation.
 
 ## Usage
 
-1. Open any `.aco` file in VS Code — the viewer opens automatically
-2. Click a swatch to copy its hex value
-3. Click any individual format row (HEX / RGB / HSL / FILTER) to copy that specific format
-4. Use the export buttons in the top-right to save the full palette
+1. Click the **Color Palette Manager** icon in the activity bar
+2. Select a palette from the list, create a new one, or click **Import** to open any supported file
+3. Click any format row on a swatch card to copy that value
+4. Use the **Export as** dropdown to save in any format
+5. Click **Save to Swatches** to persist your work
 
-## Export via Command Palette
+## Settings
 
-You can also trigger exports from the command palette (`Ctrl+Shift+P`):
-- `ACO Viewer: Export palette as JSON`
-- `ACO Viewer: Export palette as CSS variables`
-- `ACO Viewer: Export palette as Tailwind config`
+| Setting | Type | Default | Description |
+|---------|------|---------|-------------|
+| `acoViewer.paletteFolder` | string | `~/.vscode/swatches` | Folder where palettes are stored |
+| `acoViewer.fontFamily` | string | *(empty)* | Custom font family for the UI (e.g. `Orbitron, Rajdhani, sans-serif`) |
 
-## Supported Color Spaces
+## Commands
 
-The parser handles all common `.aco` color spaces:
-- RGB
-- HSB / HSV
-- CMYK
-- Lab
-- Grayscale
+| Command | Title |
+|---------|-------|
+| `acoViewer.openFile` | Swatch Viewer: Open palette file… |
 
-## Installing Locally (Before Publishing)
+## Security
+
+- Strict Content Security Policy (`default-src 'none'` with nonce-gated scripts/styles)
+- All user content HTML-escaped before rendering
+- Path traversal prevention on palette load/save
+- Message and export format validation with allowlists
+- Untrusted workspace support — workspace-level settings for palette folder and font are restricted
+- No stored secrets, no outbound network requests, zero dependency CVEs
+
+For the full security breakdown, see [FEATURES.md](FEATURES.md#security).
+
+## Installing Locally
 
 ```bash
-# Install vsce
 npm install
-
-# Package the extension
 npm run package
-
-# Install the .vsix in VS Code
-# Extensions panel → ··· menu → Install from VSIX
+# Extensions panel → ··· → Install from VSIX
 ```
 
-## Publishing to the Marketplace
+## Publishing
 
 1. Create a publisher at [marketplace.visualstudio.com](https://marketplace.visualstudio.com/manage)
-2. Update `"publisher"` in `package.json` with your publisher ID
+2. Update `"publisher"` in `package.json`
 3. Get a Personal Access Token from Azure DevOps
 4. Run:
    ```bash
    npx @vscode/vsce login your-publisher-id
    npx @vscode/vsce publish
    ```
-
-## File Format Notes
-
-`.aco` files come in two versions:
-- **V1** — colors only (no names). Colors are auto-named `Color 1`, `Color 2`, etc.
-- **V2** — colors + UTF-16BE names. The viewer uses V2 names when available.
-
-Most modern Adobe apps (Photoshop, Illustrator, etc.) write V2.

@@ -116,10 +116,18 @@
 
 ## Security
 
-- **Content Security Policy** — all webview HTML includes a strict CSP: `default-src 'none'`, scripts and styles restricted to nonce-based or `cspSource` origins
-- **Nonce generation** — a fresh 32-character random nonce is generated for every HTML render
-- **HTML escaping** — all user-provided strings (palette names, file paths, color names) are escaped before insertion into HTML
+- **Content Security Policy** — strict CSP on both webviews: `default-src 'none'`, `connect-src 'none'`, `frame-src 'none'`, `object-src 'none'`; scripts and styles restricted to nonce-based or `cspSource` origins
+- **Nonce generation** — a fresh cryptographically-secure nonce (`crypto.randomBytes`) is generated for every HTML render
+- **HTML escaping** — all user-provided strings (palette names, file paths, color values, error messages) are escaped before insertion into HTML via `escHtmlHost()` (extension host) and `escHtml()` (webview)
 - **Local resource roots** — webview resource access is restricted to the extension's own URI
+- **Path traversal prevention** — `loadPalette` validates that file paths resolve within the swatches folder; palette names are sanitized with `path.basename()` and special character stripping
+- **Message validation** — all incoming webview messages are type-checked (`typeof`, `Array.isArray`) before processing; unknown message types are silently dropped
+- **Export format allowlist** — export only accepts `json`, `css`, `tailwind`, `aco`, `ase`; unknown formats are rejected
+- **Clipboard length limit** — copy values are capped at 500 characters
+- **Font family sanitization** — custom font config values have `{}<>;` characters stripped to prevent CSS injection
+- **Untrusted workspace support** — `capabilities.untrustedWorkspaces` is set to `limited`; `acoViewer.paletteFolder` and `acoViewer.fontFamily` are restricted configurations ignored in untrusted workspaces, with a visible warning banner
+- **No secrets or network access** — the extension stores no tokens/credentials and makes zero outbound network requests
+- **Zero dependency CVEs** — `npm audit` reports no known vulnerabilities
 
 ## Settings
 
