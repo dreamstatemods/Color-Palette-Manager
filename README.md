@@ -104,18 +104,51 @@ ACO/ASE files support RGB, HSB/HSV, CMYK, CIE Lab, and Grayscale — all automat
 
 ---
 
+
 ## Security
 
-- Strict Content Security Policy (`default-src 'none'` with nonce-gated scripts/styles)
-- All user content HTML-escaped before rendering
-- Path traversal prevention on palette load/save
-- Message and export format validation with allowlists
-- Untrusted workspace support — workspace-level settings for palette folder and font are restricted
-- No stored secrets, no outbound network requests, zero dependency CVEs
+<details>
+<summary><b>🔒 Security details — click to expand</b></summary>
 
-For the full security breakdown, see [FEATURES.md](FEATURES.md#security).
+<br/>
 
----
+**Content Security Policy**
+Both webviews enforce a strict CSP: `default-src 'none'`, `connect-src 'none'`, `frame-src 'none'`, `object-src 'none'`. Scripts and styles are restricted to nonce-based or `cspSource` origins — no inline execution, no remote resources.
+
+**Nonce generation**
+A fresh cryptographically-secure nonce (`crypto.randomBytes`) is generated on every HTML render. Nonces are never reused or static.
+
+**HTML escaping**
+All user-provided strings — palette names, file paths, color values, error messages — are escaped before insertion into HTML via `escHtmlHost()` on the extension host and `escHtml()` in the webview. No raw user data is ever written directly into markup.
+
+**Local resource roots**
+Webview resource access is restricted to the extension's own URI. The filesystem is not broadly exposed.
+
+**Path traversal prevention**
+`loadPalette` validates that resolved file paths stay within the swatches folder. Palette names are sanitized with `path.basename()` and special character stripping before any filesystem operation.
+
+**Message validation**
+All incoming webview messages are type-checked (`typeof`, `Array.isArray`, object shape) before processing. Unknown message types are silently dropped — no command is ever executed directly from a message value.
+
+**Export format allowlist**
+Export only accepts `json`, `css`, `tailwind`, `aco`, `ase`. Any other value is rejected before any file operation begins.
+
+**Clipboard length limit**
+Copy values are capped at 500 characters to prevent abuse of the clipboard API.
+
+**Font family sanitization**
+Custom font values from `acoViewer.fontFamily` have `{}<>;` characters stripped before being injected into CSS, preventing CSS injection via workspace settings.
+
+**Untrusted workspace support**
+`capabilities.untrustedWorkspaces` is set to `limited`. Both `acoViewer.paletteFolder` and `acoViewer.fontFamily` are restricted configurations — they are ignored in untrusted workspaces and a visible warning banner is shown to the user.
+
+**No secrets or network access**
+The extension stores no tokens or credentials and makes zero outbound network requests.
+
+**Zero dependency CVEs**
+`npm audit` reports no known vulnerabilities across all dependencies.
+
+</details>
 
 ## Acknowledgements
 
@@ -126,19 +159,34 @@ For the full security breakdown, see [FEATURES.md](FEATURES.md#security).
 
 ## Installing Locally
 
+**Option A — Install as VSIX (recommended)**
+
 ```bash
 npm install
 npm run package
-# Extensions panel → ··· → Install from VSIX
 ```
 
-## Publishing
+Then in VS Code: **Extensions panel → `···` → Install from VSIX** and select the generated `.vsix` file. You can uninstall it cleanly through the Extensions panel like any other extension.
 
-1. Create a publisher at [marketplace.visualstudio.com](https://marketplace.visualstudio.com/manage)
-2. Update `"publisher"` in `package.json`
-3. Get a Personal Access Token from Azure DevOps
-4. Run:
-   ```bash
-   npx @vscode/vsce login your-publisher-id
-   npx @vscode/vsce publish
+---
+
+**Option B — Manual folder install (no packaging needed)**
+
+1. Clone or download this repo
+2. Run `npm install` inside the folder to install dependencies
+3. Rename the folder to match the format `publisher.extensionname-version`, e.g.:
    ```
+   yourname.color-palette-manager-1.0.0
+   ```
+4. Copy the entire folder (including `node_modules`) into your VS Code extensions directory:
+   - **Windows:** `%USERPROFILE%\.vscode\extensions\`
+   - **Mac/Linux:** `~/.vscode/extensions/`
+5. Restart VS Code or run **Developer: Reload Window** from the command palette
+
+> The folder name format must match exactly — `publisher.name-version` — and the version must match what's in `package.json` or VS Code won't load it.
+
+---
+
+**Option C — Development mode (best for testing/debugging)**
+
+Open the project folder in VS Code and press **F5**. This launches a new Extension Development Host window with the extension loaded live, full debugger access, and console output in the original window. No copying or packaging needed.
