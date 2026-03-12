@@ -7,7 +7,7 @@
  *  So for instance if you use glow text effects in Synthwave 84, you would find the text-shadow effect and paste each block back into the <style> tag of
  *  the matching HTML template function noted in the comments below.
 *   
-*   I have my main body text set in a custom css file like so: 
+*   I have my main body text set in a custom css file like so as a backup: 
 *      :root {
 *      --vscode-font-family: 'Rajdhani Regular', sans-serif !important;
 *      }
@@ -110,3 +110,40 @@ body {
     4px 4px 0px rgba(84, 193, 230, 0.11),
     0px 0px 10px rgba(84, 193, 230, 0.829);
 }
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * BLOCK 3 — Custom font override  (_getFontFamily method in SwatchSidebarProvider class)
+ * ─────────────────────────────────────────────────────────────────────────────
+ * REPLACE: the simplified _getFontFamily() method in extension.js
+ *          (inside the SwatchSidebarProvider class, near the top)
+ *
+ * This method reads your custom font setting (e.g. 'Orbitron, Rajdhani, sans-serif')
+ * from acoViewer.fontFamily, falls back to your editor font, then to a CSS variable.
+ * The returned string is injected into: html { font-family: <value>; } in both
+ * getPaletteSelectionHtml() and getWebviewContent().
+ *
+ * Without this override, the webview uses the default VS Code font variable only.
+ * ───────────────────────────────────────────────────────────────────────────── */
+
+/*  ── JavaScript — paste this method body into _getFontFamily() ──
+
+  _getFontFamily() {
+    // 1. Extension-specific override (acoViewer.fontFamily setting)
+    const custom = vscode.workspace.getConfiguration('acoViewer').get('fontFamily', '');
+    if (custom) {
+      const sanitized = custom.replace(/[{}<>;]/g, '');
+      if (sanitized) return sanitized;
+    }
+    // 2. User's editor font (editor.fontFamily setting)
+    const editorFont = vscode.workspace.getConfiguration('editor').get('fontFamily', '');
+    if (editorFont) {
+      const sanitized = editorFont.replace(/[{}<>;]/g, '');
+      if (sanitized) return sanitized;
+    }
+    // 3. CSS variable fallback
+    return 'var(--vscode-editor-font-family, var(--vscode-font-family, sans-serif))';
+  }
+
+*/
+
