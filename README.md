@@ -2,6 +2,46 @@
 
 View, edit, and manage color palettes directly in VS Code. Supports **ACO**, **ASE**, **JSON**, **CSS**, and **Tailwind** formats with full import/export, an inline color picker, drag-and-drop reordering, and real-time search.
 
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <img src="previews/SwatchMenu.gif" alt="Palette menu and swatch viewer" width="290"/><br/>
+      <sub><b>Palette Menu & Viewer</b></sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="previews/NewSwatch.gif" alt="Creating a new palette and quick-saving" width="290"/><br/>
+      <sub><b>Create & Quick-Save</b></sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="previews/Swatches.gif" alt="Copying values, renaming, deleting and adding swatches" width="290"/><br/>
+      <sub><b>Edit Swatches</b></sub>
+    </td>
+  </tr>
+</table>
+
+<details>
+<summary><b>🎨 Theme Adaptation & Custom Text Effects — click to expand</b></summary>
+
+<br/>
+
+The extension follows your active VS Code color theme automatically. All borders, backgrounds, badges, and buttons pull from your theme's color tokens so it feels native whether you're on a light, dark, or high-contrast theme.
+
+**Custom fonts and text effects** (like the effect seen below with a custom theme of mine) can be applied via the included `TEXT_EFFECTS.css` file. VS Code's webview sidebar runs in a sandboxed iframe that blocks external CSS injection from theme extensions — meaning theme-level style overrides like SynthWave '84's neon glow can't reach inside extension panels automatically. `TEXT_EFFECTS.css` works around this by loading the effects directly into the webview's own stylesheet, so you get the full aesthetic without any sandbox violations.
+
+<br/>
+
+<img src="previews/ThemeAdp.gif" alt="Theme adaptation across multiple VS Code themes" width="900"/>
+
+<br/>
+
+<img src="previews/ThemeAdp.png" alt="Custom font and glow effects closeup" width="654"/>
+
+<br/>
+
+</details>
+
+---
+
 ## Features
 
 - **Multi-format support** — import and export ACO, ASE, JSON, CSS variables, and Tailwind config files
@@ -19,6 +59,8 @@ View, edit, and manage color palettes directly in VS Code. Supports **ACO**, **A
 - **Palette switcher** — jump between saved palettes without leaving the editor view
 - **Full theme integration** — all UI colors follow your VS Code theme
 
+---
+
 ## Supported Formats
 
 | Format | Import | Export |
@@ -33,6 +75,8 @@ View, edit, and manage color palettes directly in VS Code. Supports **ACO**, **A
 
 ACO/ASE files support RGB, HSB/HSV, CMYK, CIE Lab, and Grayscale — all automatically converted to RGB. Text formats accept hex (3/4/6/8-digit), `rgb()`/`rgba()`, and `hsl()`/`hsla()` notation.
 
+---
+
 ## Usage
 
 1. Click the **Color Palette Manager** icon in the activity bar
@@ -41,18 +85,24 @@ ACO/ASE files support RGB, HSB/HSV, CMYK, CIE Lab, and Grayscale — all automat
 4. Use the **Export as** dropdown to save in any format
 5. Click **Save to Swatches** to persist your work
 
+---
+
 ## Settings
 
 | Setting | Type | Default | Description |
 |---------|------|---------|-------------|
 | `acoViewer.paletteFolder` | string | `~/.vscode/swatches` | Folder where palettes are stored |
-| `acoViewer.fontFamily` | string | *(empty)* | Custom font family for the UI (e.g. `Orbitron, Rajdhani, sans-serif`) |
+| `acoViewer.fontFamily` | string | *(empty)* | Custom font family for the UI (e.g. `Cascadia, Fira, monospace`) |
+
+---
 
 ## Commands
 
 | Command | Title |
 |---------|-------|
 | `acoViewer.openFile` | Swatch Viewer: Open palette file… |
+
+---
 
 ## Security
 
@@ -65,10 +115,14 @@ ACO/ASE files support RGB, HSB/HSV, CMYK, CIE Lab, and Grayscale — all automat
 
 For the full security breakdown, see [FEATURES.md](FEATURES.md#security).
 
+---
+
 ## Acknowledgements
 
 - [Pickr](https://github.com/Simonwep/pickr) by Simon Reinisch — MIT License
 - [VS Code Codicons](https://github.com/microsoft/vscode-codicons) by Microsoft — [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/)
+
+---
 
 ## Installing Locally
 
