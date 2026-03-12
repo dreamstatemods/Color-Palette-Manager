@@ -16,3 +16,6 @@ vscode-custom.js
 # OS files
 .DS_Store
 Thumbs.db
+
+# Other files
+FEATURES.md
