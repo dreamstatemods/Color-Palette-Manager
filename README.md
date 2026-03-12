@@ -1,3 +1,9 @@
+![VS Code](https://img.shields.io/badge/VS%20Code-Extension-007ACC?style=flat-square&logo=visualstudiocode&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES2020-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![Extension](https://img.shields.io/badge/Type-Extension-5C2D91?style=flat-square&logoColor=white)
+![Claude](https://img.shields.io/badge/Built%20with-Claude-CC785C?style=flat-square&logo=anthropic&logoColor=white)
+![Vibe Coded](https://img.shields.io/badge/Vibe-Coded-ff69b4?style=flat-square&logoColor=white)
+
 # Color Palette Manager
 
 View, edit, and manage color palettes directly in VS Code. Supports **ACO**, **ASE**, **JSON**, **CSS**, and **Tailwind** formats with full import/export, an inline color picker, drag-and-drop reordering, and real-time search.
