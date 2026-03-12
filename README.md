@@ -46,13 +46,18 @@ View, edit, and manage color palettes directly in VS Code. Supports **ACO**, **A
 
 The extension follows your active VS Code color theme automatically. All borders, backgrounds, badges, and buttons pull from your theme's color tokens so it feels native whether you're on a light, dark, or high-contrast theme.
 
-**Custom fonts and text effects** (like the effect seen below with a custom theme of mine) can be applied via the included `TEXT_EFFECTS.css` file. VS Code's webview sidebar runs in a sandboxed iframe that blocks external CSS injection from theme extensions — meaning theme-level style overrides like SynthWave '84's neon glow can't reach inside extension panels automatically. `TEXT_EFFECTS.css` works around this by loading the effects directly into the webview's own stylesheet, so you get the full aesthetic without any sandbox violations.
-
 <br/>
 
 <img src="previews/ThemeAdp.gif" alt="Theme adaptation across multiple VS Code themes" width="900"/>
 
 <br/>
+<br/>
+
+**Custom fonts and text effects** (like the effect seen below with a custom theme of mine) can be applied via the included `TEXT_EFFECTS.css` file. VS Code's webview sidebar runs in a sandboxed iframe that blocks external CSS injection from theme extensions — meaning theme-level style overrides like SynthWave '84's neon glow can't reach inside extension panels automatically. `TEXT_EFFECTS.css` works around this by loading the effects directly into the webview's own stylesheet, so you get the full aesthetic without any sandbox violations.
+
+
+<br/>
+
 
 <img src="previews/ThemeAdp.png" alt="Custom font and glow effects closeup" width="654"/>
 
