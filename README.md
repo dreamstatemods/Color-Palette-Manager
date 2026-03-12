@@ -1,9 +1,22 @@
+<p align="center">
+  <img src="media/icon.png" width="150" height="150" alt="Color Palette Manager">
+</p>
+
+<div align="center">
+  
 ![VS Code](https://img.shields.io/badge/VS%20Code-Extension-007ACC?style=plastic&logo=visualstudiocode&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES2020-F7DF1E?style=plastic&logo=javascript&logoColor=black)
 ![Claude](https://img.shields.io/badge/Built%20with-Claude-CC785C?style=plastic&logo=anthropic&logoColor=white)
 ![Vibe Coded](https://img.shields.io/badge/Vibe-Coded-ff69b4?style=plastic&logoColor=white)
 
+  
+</div>
+
+<div align="center">
+  
 Extension is in a preview state, there will be changes in the coming weeks before it's finalized. Information in the README is up to date for the extension. -ds
+
+</div>
 
 # Color Palette Manager
 
