@@ -1,0 +1,112 @@
+/*
+ * ══════════════════════════════════════════════════════════════════════════════
+ *  TEXT EFFECTS — Orbitron / Rajdhani headers + cyan glow (extracted from extension.js)
+ * ══════════════════════════════════════════════════════════════════════════════
+ *
+ *  These CSS blocks are added to get text effects and custom fonts working in the webview, which don't support external CSS files.
+ *  So for instance if you use glow text effects in Synthwave 84, you would find the text-shadow effect and paste each block back into the <style> tag of
+ *  the matching HTML template function noted in the comments below.
+*   
+*   I have my main body text set in a custom css file like so: 
+*      :root {
+*      --vscode-font-family: 'Rajdhani Regular', sans-serif !important;
+*      }
+ *
+ *  Glow colour:  rgba(84, 193, 230, *)   — DS Lucy cyan
+ *  Header font:  'Orbitron', sans-serif   (install via acoViewer.fontFamily
+ *                setting, e.g. 'Orbitron, Rajdhani, sans-serif')
+ * ══════════════════════════════════════════════════════════════════════════════
+ */
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * BLOCK 1 — Palette Selection page  (getPaletteSelectionHtml function)
+ * ─────────────────────────────────────────────────────────────────────────────
+ * INSERT INTO: the <style> tag inside getPaletteSelectionHtml(),
+ *              right after the .btn-action:hover rule, before </style></head><body>
+ * ───────────────────────────────────────────────────────────────────────────── */
+
+/* Orbitron headers */
+.page-header-title, .section-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px; letter-spacing: 1.5px; font-weight: 600;
+  text-shadow:
+    1px 1px 0px rgba(84, 193, 230, 0.7),
+    2px 2px 0px rgba(84, 193, 230, 0.1),
+    3px 3px 0px rgba(84, 193, 230, 0.3),
+    4px 4px 0px rgba(84, 193, 230, 0.11),
+    0px 0px 10px rgba(84, 193, 230, 0.829);
+}
+
+/* Global body glow */
+body {
+  text-shadow: 0 0 8px rgba(84, 193, 230, 1.5);
+}
+
+/* Palette rows, buttons, notices */
+.palette-row-name, .palette-row-meta, .btn-action, .palette-row.create, .warning-notice {
+  text-shadow:
+    1px 1px 0px rgba(84, 193, 230, 0.7),
+    2px 2px 0px rgba(84, 193, 230, 0.1),
+    3px 3px 0px rgba(84, 193, 230, 0.3),
+    4px 4px 0px rgba(84, 193, 230, 0.11),
+    0px 0px 10px rgba(84, 193, 230, 0.829);
+}
+
+/* Codicon icon glow */
+.codicon {
+  text-shadow:
+    1px 1px 0px rgba(84, 193, 230, 0.7),
+    2px 2px 0px rgba(84, 193, 230, 0.1),
+    3px 3px 0px rgba(84, 193, 230, 0.3),
+    4px 4px 0px rgba(84, 193, 230, 0.11),
+    0px 0px 10px rgba(84, 193, 230, 0.829);
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * BLOCK 2 — Palette Viewer page  (getWebviewContent function)
+ * ─────────────────────────────────────────────────────────────────────────────
+ * INSERT INTO: the first <style> tag inside getWebviewContent(),
+ *              right after the .empty/.no-results rule, before </style>
+ * ───────────────────────────────────────────────────────────────────────────── */
+
+/* Orbitron headers + group labels */
+.page-header-title, .header-top-title, .section-label, .group-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px; letter-spacing: 1.5px; font-weight: 600;
+  text-shadow:
+    1px 1px 0px rgba(84, 193, 230, 0.7),
+    2px 2px 0px rgba(84, 193, 230, 0.1),
+    3px 3px 0px rgba(84, 193, 230, 0.3),
+    4px 4px 0px rgba(84, 193, 230, 0.11),
+    0px 0px 10px rgba(84, 193, 230, 0.829);
+}
+
+/* Global body glow */
+body {
+  text-shadow: 0 0 8px rgba(84, 193, 230, 1.5);
+}
+
+/* Card info, buttons, header, badges, inputs, dropdowns */
+.color-name, .card-info, .btn, .btn-save-primary, .btn-back, .btn-folder,
+.header-meta, .fmt-badge, .palette-row-name, .palette-row-meta,
+.warning-notice, .error-banner,
+.search-inline, .exports select, .palette-switcher select {
+  text-shadow:
+    1px 1px 0px rgba(84, 193, 230, 0.7),
+    2px 2px 0px rgba(84, 193, 230, 0.1),
+    3px 3px 0px rgba(84, 193, 230, 0.3),
+    4px 4px 0px rgba(84, 193, 230, 0.11),
+    0px 0px 10px rgba(84, 193, 230, 0.829);
+}
+
+/* Codicon icon glow */
+.codicon {
+  text-shadow:
+    1px 1px 0px rgba(84, 193, 230, 0.7),
+    2px 2px 0px rgba(84, 193, 230, 0.1),
+    3px 3px 0px rgba(84, 193, 230, 0.3),
+    4px 4px 0px rgba(84, 193, 230, 0.11),
+    0px 0px 10px rgba(84, 193, 230, 0.829);
+}
