@@ -65,6 +65,11 @@ ACO/ASE files support RGB, HSB/HSV, CMYK, CIE Lab, and Grayscale — all automat
 
 For the full security breakdown, see [FEATURES.md](FEATURES.md#security).
 
+## Acknowledgements
+
+- [Pickr](https://github.com/Simonwep/pickr) by Simon Reinisch — MIT License
+- [VS Code Codicons](https://github.com/microsoft/vscode-codicons) by Microsoft — [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/)
+
 ## Installing Locally
 
 ```bash
