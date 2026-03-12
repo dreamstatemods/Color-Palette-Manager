@@ -3,7 +3,7 @@
  *  TEXT EFFECTS — Orbitron / Rajdhani headers + cyan glow (extracted from extension.js)
  * ══════════════════════════════════════════════════════════════════════════════
  *
- *  These CSS blocks are added to get text effects and custom fonts working in the webview, which don't support external CSS files.
+ *  These CSS blocks are added to get text effects and custom fonts working in the webview, which doesn't support external CSS files.
  *  So for instance if you use glow text effects in Synthwave 84, you would find the text-shadow effect and paste each block back into the <style> tag of
  *  the matching HTML template function noted in the comments below.
 *   
