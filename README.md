@@ -5,15 +5,15 @@ View, edit, and manage color palettes directly in VS Code. Supports **ACO**, **A
 <table>
   <tr>
     <td align="center" width="33%">
-      <img src="previews/SwatchMenu.gif" alt="Palette menu and swatch viewer" width="290"/><br/>
+      <img src="previews/SwatchMenu.gif" alt="Palette menu and swatch viewer" width="270"/><br/>
       <sub><b>Palette Menu & Viewer</b></sub>
     </td>
     <td align="center" width="33%">
-      <img src="previews/NewSwatch.gif" alt="Creating a new palette and quick-saving" width="290"/><br/>
+      <img src="previews/NewSwatch.gif" alt="Creating a new palette and quick-saving" width="270"/><br/>
       <sub><b>Create & Quick-Save</b></sub>
     </td>
     <td align="center" width="33%">
-      <img src="previews/Swatches.gif" alt="Copying values, renaming, deleting and adding swatches" width="290"/><br/>
+      <img src="previews/Swatches.gif" alt="Copying values, renaming, deleting and adding swatches" width="270"/><br/>
       <sub><b>Edit Swatches</b></sub>
     </td>
   </tr>
